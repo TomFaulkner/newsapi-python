@@ -1,6 +1,8 @@
 import logging
+from functools import partial
 
 import requests
+
 from newsapi.newsapi_auth import NewsApiAuth
 
 
@@ -9,9 +11,11 @@ LOGGER = logging.getLogger()
 
 class NewsApiClient(object):
 
-    def __init__(self, api_key, api_url='https://newsapi.org/v2/'):
-        self.url = api_url.rstrip('/')
-        self.auth = NewsApiAuth(api_key=api_key)
+    def __init__(self, api_key, api_url='https://newsapi.org/v2/', timeout=30):
+        self._url = api_url.rstrip('/')
+        self._get = partial(requests.get,
+                            auth=NewsApiAuth(api_key=api_key),
+                            timeout=timeout)
 
     def top_headlines(self, q=None, sources=None, language=None, country=None,
                       category=None, page_size=None, page=None):
@@ -27,9 +31,7 @@ class NewsApiClient(object):
 
         # Send Request
         LOGGER.debug("Params %s", payload)
-        r = requests.get(self.url + '/top-headlines', auth=self.auth,
-                         timeout=30, params=payload)
-        return r.json()
+        return self._get(self._url + '/top-headlines', params=payload).json()
 
     def get_top_headlines(self, *args, **kwargs):
         return self.top_headlines(*args, **kwargs)
@@ -51,9 +53,7 @@ class NewsApiClient(object):
 
         # Send Request
         LOGGER.debug("Params %s", payload)
-        r = requests.get(self.url + '/everything', auth=self.auth, timeout=30,
-                         params=payload)
-        return r.json()
+        return self._get(self._url + '/everything', params=payload).json()
 
     def get_everything(self, *args, **kwargs):
         return self.everything(*args, **kwargs)
@@ -67,9 +67,7 @@ class NewsApiClient(object):
 
         # Send Request
         LOGGER.debug("Params %s", payload)
-        r = requests.get(self.url + '/sources', auth=self.auth, timeout=30,
-                         params=payload)
-        return r.json()
+        return self._get(self._url + '/sources', params=payload).json()
 
     def get_sources(self, *args, **kwargs):
         return self.sources(*args, **kwargs)
