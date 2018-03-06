@@ -10,7 +10,7 @@ from newsapi.constants import COUNTRIES, CATEGORIES, LANGUAGES
 LOGGER = logging.getLogger()
 
 
-class NewsApiClient(object):
+class NewsApi(object):
     """Client for NewsApi.org.
 
     An API Key is required, get a free one at https://newsapi.org.
