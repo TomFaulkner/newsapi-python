@@ -12,14 +12,15 @@ LOGGER = logging.getLogger()
 class NewsApiClient(object):
     """Client for NewsApi.org, an API Key is required, get one at newsapi.org.
     """
-    def __init__(self, api_key, api_url='https://newsapi.org/v2/', timeout=30):
+    def __init__(self, api_key: str, api_url='https://newsapi.org/v2/',
+                 timeout=30) -> None:
         self._url = api_url.rstrip('/')
         self._get = partial(requests.get,
                             auth=NewsApiAuth(api_key=api_key),
                             timeout=timeout)
 
     def top_headlines(self, q: list=None, sources: list=None,
-                      language: list=None, country: list=None,
+                      language: str=None, country: str=None,
                       category: str=None, page_size: int=None, page: int=None):
         """Returns live top and breaking headlines for a country, specific
         category in a country, single source, or multiple sources..
@@ -63,7 +64,8 @@ class NewsApiClient(object):
 
     def everything(self, q: list=None, sources: list=None, domains: list=None,
                    from_parameter: str=None, to: str=None, language: str=None,
-                   sort_by: str=None, page: int=None, page_size: int=None):
+                   sort_by: str=None, page: int=None,
+                   page_size: int=None) -> str:
         """Returns the subset of news publishers that top headlines...
         Optional parameters:
 
@@ -103,7 +105,7 @@ class NewsApiClient(object):
         return self._get(self._url + '/everything', params=payload).json()
 
     def sources(self, category: str=None, language: str=None,
-                country: str=None):
+                country: str=None) -> str:
         """Retrieve list of source names optionally filtering by category and
         language.
         """

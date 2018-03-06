@@ -8,7 +8,7 @@ install_requires = [
 
 tests_require = [
     'pytest',
-    ]
+]
 
 setup(
     name='newsapi-python',
@@ -22,7 +22,7 @@ setup(
     tests_require=tests_require,
     description='An unofficial Python client for the News API',
     download_url='https://github.com/mattlisiv/newsapi-python/archive/master.zip',
-    keywords=['newsapi','news'],
+    keywords=['newsapi', 'news'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -30,12 +30,7 @@ setup(
         'Intended Audience :: Information Technology',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 )
