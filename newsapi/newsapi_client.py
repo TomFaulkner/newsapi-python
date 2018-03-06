@@ -33,9 +33,6 @@ class NewsApiClient(object):
         LOGGER.debug("Params %s", payload)
         return self._get(self._url + '/top-headlines', params=payload).json()
 
-    def get_top_headlines(self, *args, **kwargs):
-        return self.top_headlines(*args, **kwargs)
-
     def everything(self, q=None, sources=None, domains=None,
                    from_parameter=None, to=None, language=None,
                    sort_by=None, page=None, page_size=None):
@@ -55,9 +52,6 @@ class NewsApiClient(object):
         LOGGER.debug("Params %s", payload)
         return self._get(self._url + '/everything', params=payload).json()
 
-    def get_everything(self, *args, **kwargs):
-        return self.everything(*args, **kwargs)
-
     def sources(self, category=None, language=None, country=None):
         # Define Payload
         payload = {}
@@ -68,6 +62,3 @@ class NewsApiClient(object):
         # Send Request
         LOGGER.debug("Params %s", payload)
         return self._get(self._url + '/sources', params=payload).json()
-
-    def get_sources(self, *args, **kwargs):
-        return self.sources(*args, **kwargs)
